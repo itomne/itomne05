@@ -67,10 +67,10 @@ def page1():
             with st.spinner("アート先生の返信を受診中..."):
                 time.sleep(3)
             st.markdown('### アート先生より')
-            st.info(response.choices[0].message.content.strip())
-            print(prompt)
-            print(response.choices[0].message.content.strip())
-            conversation_history_1.append({"role": "assistant", "content": response.choices[0].message.content.strip()})
+            st.info(response.choices[0].message.content)
+            # print(prompt)
+            # print(response.choices[0].message.content.strip())
+            conversation_history_1.append({"role": "assistant", "content":  response.choices[0].message.content})
 
     st.markdown('### 会話履歴:')
     for message in conversation_history_1:
