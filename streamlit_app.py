@@ -56,7 +56,7 @@ def page1():
                 'Content-Type': 'application/json'
             }
             data = {
-                "model": "gpt-3.5-turbo",
+                "model": "gpt-4",
                 "messages": [
                     {"role": "system", "content": "命令書:あなたは[対話型鑑賞の専門家]です。相手は[ビジネスパーソン]です。"},
                     {"role": "system", "content": "命令書:あなたは以下の制約条件に従って、クライアントに問いかけます。"},
