@@ -21,8 +21,8 @@ conversation_history_5 = []  # Global scope
 def main_page():
     
     st.title('ATAIとの対話型鑑賞')
-    st.write("アート思考力を高めるために対話型鑑賞しましょう。左のサイドバーからあなたが好きな絵を選んでください。好きな絵についてATAI(Art Thinking AI) と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう'np.random.normal(size=5)")
-    st.write("好きな絵についてATAI(Art Thinking AI) と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう'np.random.normal(size=5)")
+    st.write("アート思考力を高めるために対話型鑑賞しましょう。左のサイドバーからあなたが好きな絵を選んでください。好きな絵についてATAI(Art Thinking AI) と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう")
+    st.write("好きな絵についてATAI(Art Thinking AI) と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう")
     st.write("page1~5をの絵を選択して、対話型鑑賞をやってみましょう！")
     image_main = Image.open("総合.png")
     st.image(image_main, width=400)
@@ -58,17 +58,16 @@ def page1():
             data = {
                 "model": "gpt-3.5-turbo",
                 "messages": [
-                    {"role": "system", "content": "アート思考のデモンストレーションを行います。あなたは[アート思考の専門家]です。相手は[ビジネスパーソン]です。あなたは以下の制約条件に従って、クライアントに問いかけます。"},
-                    {"role": "system", "content": "1度の会話で行う質問は必ず1つずつ。"},
-                    {"role": "system", "content": "一度の会話で答えられる文字数は、150字以内"},
-                    {"role": "system", "content": "説明する時は、あなたが質問を5つ以上行った後とする。"},
-                    {"role": "system", "content": "ユーザーが画像を入力したら、あなたはその画像を解釈し解説する。"},
-                    {"role": "system", "content": "ユーザーが[絵を描いて]と言ったら、あなたは相手のイメージを質問して画像を出力する"},
-                    {"role": "system", "content": "相手が「終了」と言ったら、あなたは「ありがとうございました」と返す"},
-                    {"role": "system", "content": "相手との会話で[問題提起力]を評価する。相手の[問題提起力]を100点満点で点数を付ける。講評として相手の考え方・特徴を述べる。"},
-                    {"role": "system", "content": "まず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。"},
-                    {"role": "system", "content": "仕事における問題意識について考えてみましょう。あなたの会社・職場で「当たり前」「常識」とされているようなことで、疑問や違和感を抱いているものはあるでしょうか？ 思いついたものを自由に教えてください。"},
-                    {"role": "system", "content": "では、あなたはまず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。 "},
+                    {"role": "system", "content": "命令書:あなたは[対話型鑑賞の専門家]です。相手は[ビジネスパーソン]です。"},
+                    {"role": "system", "content": "命令書:あなたは以下の制約条件に従って、クライアントに問いかけます。"},
+                    {"role": "system", "content": "制約条件:あなたはリクリット・ティラバーニャ「“Who’s Afraid of Red, Yellow and Green,」という作品について、相手とやり取りする"},
+                    {"role": "system", "content": "制約条件:あなたが1度の会話で行う質問は必ず1つずつ"},
+                    {"role": "system", "content": "制約条件:あなたが一度の会話で答えられる文字数は、150字以内。"},
+                    {"role": "system", "content": "制約条件:あなたが説明する時は、あなたが質問を5つ以上行った後とする。"},
+                    {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
+                    {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
+                    {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
+                    {"role": "system", "content": "以上の命令書と制約条件に従って返信してください。"},
                 ] + conversation_history_1
             }
 
@@ -77,35 +76,23 @@ def page1():
             # レスポンスの処理
             with st.spinner("ATAIの返信を受診中..."):
                 time.sleep(2)
-            st.markdown('### ATAI (Art Thinking AI)より')
+            st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
-            # st.info(response.choices[0].message.content)
-            
-
-
-            # print(prompt)
-            # print(response.choices[0].message.content.strip())
+           
             conversation_history_1.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
 
-
-    '''st.markdown('### 会話履歴:')
-    for message in conversation_history_1:
-        if message["role"] == "user":
-            st.write(f"あなた: {message['content']}")
-        else:  # if assistant
-            st.write(f"アート先生: {message['content']}")'''
     
 def page2():
     prompt = ""  # Initialize your prompt
 
     st.title('マルセル・デュシャン「泉」')
-    st.weite('好きな絵についてATAI(Art Thinking AI)  と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょ')
+    st.write('好きな絵についてATAI(Art Thinking AI)  と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょ')
     image_1 = Image.open("4.マルセル・デュシャン「泉」.png")
     st.image(image_1, width=400)
     
 
     with st.form('qestion_form', clear_on_submit=False):
-        st.markdown('### 話しかけてみよう!')
+        st.markdown('''### 話しかけてみよう!''')
         prompt = st.text_area('テキストエリア')
         submitted = st.form_submit_button("送信")
 
@@ -123,18 +110,17 @@ def page2():
             data = {
                 "model": "gpt-3.5-turbo",
                 "messages": [
-                    {"role": "system", "content": "アート思考のデモンストレーションを行います。あなたは[アート思考の専門家]です。相手は[ビジネスパーソン]です。あなたは以下の制約条件に従って、クライアントに問いかけます。"},
-                    {"role": "system", "content": "1度の会話で行う質問は必ず1つずつ。"},
-                    {"role": "system", "content": "一度の会話で答えられる文字数は、150字以内"},
-                    {"role": "system", "content": "説明する時は、あなたが質問を5つ以上行った後とする。"},
-                    {"role": "system", "content": "ユーザーが画像を入力したら、あなたはその画像を解釈し解説する。"},
-                    {"role": "system", "content": "ユーザーが[絵を描いて]と言ったら、あなたは相手のイメージを質問して画像を出力する"},
-                    {"role": "system", "content": "相手が「終了」と言ったら、あなたは「ありがとうございました」と返す"},
-                    {"role": "system", "content": "相手との会話で[問題提起力]を評価する。相手の[問題提起力]を100点満点で点数を付ける。講評として相手の考え方・特徴を述べる。"},
-                    {"role": "system", "content": "まず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。"},
-                    {"role": "system", "content": "仕事における問題意識について考えてみましょう。あなたの会社・職場で「当たり前」「常識」とされているようなことで、疑問や違和感を抱いているものはあるでしょうか？ 思いついたものを自由に教えてください。"},
-                    {"role": "system", "content": "では、あなたはまず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。 "},
-                ] + conversation_history_1
+                     {"role": "system", "content": "命令書:あなたは[対話型鑑賞の専門家]です。相手は[ビジネスパーソン]です。"},
+                    {"role": "system", "content": "命令書:あなたは以下の制約条件に従って、クライアントに問いかけます。"},
+                    {"role": "system", "content": "制約条件:あなたはマルセル・デュシャン「泉」という作品について、相手とやり取りする"},
+                    {"role": "system", "content": "制約条件:あなたが1度の会話で行う質問は必ず1つずつ"},
+                    {"role": "system", "content": "制約条件:あなたが一度の会話で答えられる文字数は、150字以内。"},
+                    {"role": "system", "content": "制約条件:あなたが説明する時は、あなたが質問を5つ以上行った後とする。"},
+                    {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
+                    {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
+                    {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
+                    {"role": "system", "content": "以上の命令書と制約条件に従って返信してください。"},
+                     ] + conversation_history_1
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
@@ -142,7 +128,7 @@ def page2():
             # レスポンスの処理
             with st.spinner("ATAIの返信を受診中..."):
                 time.sleep(2)
-            st.markdown('### ATAI (Art Thinking AI)より')
+            st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
             # st.info(response.choices[0].message.content)
             
@@ -181,18 +167,17 @@ def page3():
             data = {
                 "model": "gpt-3.5-turbo",
                 "messages": [
-                    {"role": "system", "content": "アート思考のデモンストレーションを行います。あなたは[アート思考の専門家]です。相手は[ビジネスパーソン]です。あなたは以下の制約条件に従って、クライアントに問いかけます。"},
-                    {"role": "system", "content": "1度の会話で行う質問は必ず1つずつ。"},
-                    {"role": "system", "content": "一度の会話で答えられる文字数は、150字以内"},
-                    {"role": "system", "content": "説明する時は、あなたが質問を5つ以上行った後とする。"},
-                    {"role": "system", "content": "ユーザーが画像を入力したら、あなたはその画像を解釈し解説する。"},
-                    {"role": "system", "content": "ユーザーが[絵を描いて]と言ったら、あなたは相手のイメージを質問して画像を出力する"},
-                    {"role": "system", "content": "相手が「終了」と言ったら、あなたは「ありがとうございました」と返す"},
-                    {"role": "system", "content": "相手との会話で[問題提起力]を評価する。相手の[問題提起力]を100点満点で点数を付ける。講評として相手の考え方・特徴を述べる。"},
-                    {"role": "system", "content": "まず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。"},
-                    {"role": "system", "content": "仕事における問題意識について考えてみましょう。あなたの会社・職場で「当たり前」「常識」とされているようなことで、疑問や違和感を抱いているものはあるでしょうか？ 思いついたものを自由に教えてください。"},
-                    {"role": "system", "content": "では、あなたはまず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。 "},
-                ] + conversation_history_1
+                    {"role": "system", "content": "命令書:あなたは[対話型鑑賞の専門家]です。相手は[ビジネスパーソン]です。"},
+                    {"role": "system", "content": "命令書:あなたは以下の制約条件に従って、クライアントに問いかけます。"},
+                    {"role": "system", "content": "制約条件:あなたはクリスト＆ジャンヌ＝クロード「「L’Arc_de_Triomphe,_Wrapped」という作品について、相手とやり取りする"},
+                    {"role": "system", "content": "制約条件:あなたが1度の会話で行う質問は必ず1つずつ"},
+                    {"role": "system", "content": "制約条件:あなたが一度の会話で答えられる文字数は、150字以内。"},
+                    {"role": "system", "content": "制約条件:あなたが説明する時は、あなたが質問を5つ以上行った後とする。"},
+                    {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
+                    {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
+                    {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
+                    {"role": "system", "content": "以上の命令書と制約条件に従って返信してください。"},
+                     ] + conversation_history_1
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
@@ -201,7 +186,7 @@ def page3():
             # レスポンスの処理
             with st.spinner("アート先生の返信を受診中..."):
                 time.sleep(2)
-            st.markdown('### ATAI (Art Thinking AI)より')
+            st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
             # st.info(response.choices[0].message.content)
             
@@ -222,7 +207,7 @@ def page4():
     
 
     with st.form('qestion_form', clear_on_submit=False):
-        st.markdn('### 話しかけてみよう!')
+        st.markdn('''### 話しかけてみよう!''')
         prompt = st.text_area('テキストエリア')
         submitted = st.form_submit_button("送信")
 
@@ -240,18 +225,17 @@ def page4():
             data = {
                 "model": "gpt-3.5-turbo",
                 "messages": [
-                    {"role": "system", "content": "アート思考のデモンストレーションを行います。あなたは[アート思考の専門家]です。相手は[ビジネスパーソン]です。あなたは以下の制約条件に従って、クライアントに問いかけます。"},
-                    {"role": "system", "content": "1度の会話で行う質問は必ず1つずつ。"},
-                    {"role": "system", "content": "一度の会話で答えられる文字数は、150字以内"},
-                    {"role": "system", "content": "説明する時は、あなたが質問を5つ以上行った後とする。"},
-                    {"role": "system", "content": "ユーザーが画像を入力したら、あなたはその画像を解釈し解説する。"},
-                    {"role": "system", "content": "ユーザーが[絵を描いて]と言ったら、あなたは相手のイメージを質問して画像を出力する"},
-                    {"role": "system", "content": "相手が「終了」と言ったら、あなたは「ありがとうございました」と返す"},
-                    {"role": "system", "content": "相手との会話で[問題提起力]を評価する。相手の[問題提起力]を100点満点で点数を付ける。講評として相手の考え方・特徴を述べる。"},
-                    {"role": "system", "content": "まず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。"},
-                    {"role": "system", "content": "仕事における問題意識について考えてみましょう。あなたの会社・職場で「当たり前」「常識」とされているようなことで、疑問や違和感を抱いているものはあるでしょうか？ 思いついたものを自由に教えてください。"},
-                    {"role": "system", "content": "では、あなたはまず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。 "},
-                ] + conversation_history_1
+                    {"role": "system", "content": "命令書:あなたは[対話型鑑賞の専門家]です。相手は[ビジネスパーソン]です。"},
+                    {"role": "system", "content": "命令書:あなたは以下の制約条件に従って、クライアントに問いかけます。"},
+                    {"role": "system", "content": "制約条件:あなたはフェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)という作品について、相手とやり取りする"},
+                    {"role": "system", "content": "制約条件:あなたが1度の会話で行う質問は必ず1つずつ"},
+                    {"role": "system", "content": "制約条件:あなたが一度の会話で答えられる文字数は、150字以内。"},
+                    {"role": "system", "content": "制約条件:あなたが説明する時は、あなたが質問を5つ以上行った後とする。"},
+                    {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
+                    {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
+                    {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
+                    {"role": "system", "content": "以上の命令書と制約条件に従って返信してください。"},
+                    ] + conversation_history_1
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
@@ -260,7 +244,7 @@ def page4():
             # レスポンスの処理
             with st.spinner("アート先生の返信を受診中..."):
                 time.sleep(2)
-            st.markdown('### ATAI (Art Thinking AI)より')
+            st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
             # st.info(response.choices[0].message.content)
             
@@ -299,19 +283,18 @@ def page5():
             }
             data = {
                 "model": "gpt-3.5-turbo",
-                "messages": [
-                    {"role": "system", "content": "アート思考のデモンストレーションを行います。あなたは[アート思考の専門家]です。相手は[ビジネスパーソン]です。あなたは以下の制約条件に従って、クライアントに問いかけます。"},
-                    {"role": "system", "content": "1度の会話で行う質問は必ず1つずつ。"},
-                    {"role": "system", "content": "一度の会話で答えられる文字数は、150字以内"},
-                    {"role": "system", "content": "説明する時は、あなたが質問を5つ以上行った後とする。"},
-                    {"role": "system", "content": "ユーザーが画像を入力したら、あなたはその画像を解釈し解説する。"},
-                    {"role": "system", "content": "ユーザーが[絵を描いて]と言ったら、あなたは相手のイメージを質問して画像を出力する"},
-                    {"role": "system", "content": "相手が「終了」と言ったら、あなたは「ありがとうございました」と返す"},
-                    {"role": "system", "content": "相手との会話で[問題提起力]を評価する。相手の[問題提起力]を100点満点で点数を付ける。講評として相手の考え方・特徴を述べる。"},
-                    {"role": "system", "content": "まず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。"},
-                    {"role": "system", "content": "仕事における問題意識について考えてみましょう。あなたの会社・職場で「当たり前」「常識」とされているようなことで、疑問や違和感を抱いているものはあるでしょうか？ 思いついたものを自由に教えてください。"},
-                    {"role": "system", "content": "では、あなたはまず、[あなたが人生で影響を受けたアート作品、もしくは映画・音楽・小説などを含む文化的表現物を教えてください]と聞いてください。相手とやり取りを何度か行った後に、下記の質問をしてください。 "},
-                ] + conversation_history_1
+                "messages":[
+                    {"role": "system", "content": "命令書:あなたは[対話型鑑賞の専門家]です。相手は[ビジネスパーソン]です。"},
+                    {"role": "system", "content": "命令書:あなたは以下の制約条件に従って、クライアントに問いかけます。"},
+                    {"role": "system", "content": "制約条件:あなたはパブロ・ピカソ「アヴィニョンの娘たち」という作品について、相手とやり取りする"},
+                    {"role": "system", "content": "制約条件:あなたが1度の会話で行う質問は必ず1つずつ"},
+                    {"role": "system", "content": "制約条件:あなたが一度の会話で答えられる文字数は、150字以内。"},
+                    {"role": "system", "content": "制約条件:あなたが説明する時は、あなたが質問を5つ以上行った後とする。"},
+                    {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
+                    {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
+                    {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
+                    {"role": "system", "content": "以上の命令書と制約条件に従って返信してください。"},
+                     ] + conversation_history_1
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
@@ -320,7 +303,7 @@ def page5():
             # レスポンスの処理
             with st.spinner("アート先生の返信を受診中..."):
                 time.sleep(2)
-            st.markdown('### ATAI (Art Thinking AI)より')
+            st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
             # st.info(response.choices[0].message.content)
             
@@ -340,8 +323,6 @@ page_names_to_funcs = {
     "4.フェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)": page4,
     "5.パブロ・ピカソ「アヴィニョンの娘たち」": page5,
     }
-
-)
 
 selected_page = st.sidebar.radio("メニュー", ["main_page",
                                           "1.リクリット・ティラバーニャ「“Who’s_Afraid_of_Red,_Yellow_and_Green,」",
