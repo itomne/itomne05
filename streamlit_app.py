@@ -2,7 +2,6 @@ import os
 import time
 import openai
 import requests
-import pandas as pd
 import streamlit as st
 
 from PIL import Image
