@@ -77,7 +77,7 @@ def page2():
     prompt = ""  # Initialize your prompt
 
     st.title('2.想像力')
-    st.write('<font size="5">好きな絵についてATAI(Art Thinking AI)  と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう。</font>', unsafe_allow_html=True)
+    st.write('<font size="5">ATAI(Art Thinking AI) と思ったこと/感じたことを会話してみましょう。</font>', unsafe_allow_html=True)
     
 
     with st.form('qestion_form', clear_on_submit=False):
@@ -131,7 +131,7 @@ def page3():
     prompt = ""  # Initialize your prompt
 
     st.title('3.実現力')
-    st.write('<font size="5">好きな絵についてATAI(Art Thinking AI)  と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう。</font>', unsafe_allow_html=True)
+    st.write('<font size="5">ATAI(Art Thinking AI) と思ったこと/感じたことを会話してみましょう。</font>', unsafe_allow_html=True)
     
 
     with st.form('qestion_form', clear_on_submit=False):
@@ -186,7 +186,7 @@ def page4():
     prompt = ""  # Initialize your prompt
 
     st.title('4.対話力')
-    st.write('<font size="5">好きな絵についてATAI(Art Thinking AI)  と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう。</font>', unsafe_allow_html=True)
+    st.write('<font size="5">ATAI(Art Thinking AI) と思ったこと/感じたことを会話してみましょう。</font>', unsafe_allow_html=True)
     
 
     with st.form('qestion_form', clear_on_submit=False):
