@@ -25,17 +25,11 @@ def main_page():
     st.write('<font size="5">アート思考に必要な4つの力を高めるためにそれぞれの窓から対話をしましょう。左のサイドバーからあなたが体験したい窓を選んでください。窓を開けたらATAI(Art Thinking AI)と思ったこと/感じたことを話してみましょう。素直に感じたこと、思いを書き出して会話を楽しみましょう。</font>', unsafe_allow_html=True)
 
 
-
-
-
 def page1():
     prompt = ""  # Initialize your prompt
 
     st.title("1.問題提起力")
     st.write('<font size="5">ATAI(Art Thinking AI) と思ったこと/感じたことを会話してみましょう。</font>', unsafe_allow_html=True)
-
-    
-
 
     with st.form('qestion_form', clear_on_submit=False):
         st.markdown('### 話しかけてみよう!')
@@ -82,10 +76,8 @@ def page1():
 def page2():
     prompt = ""  # Initialize your prompt
 
-    st.title('マルセル・デュシャン「泉」')
+    st.title('2.想像力')
     st.write('<font size="5">好きな絵についてATAI(Art Thinking AI)  と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう。</font>', unsafe_allow_html=True)
-    image_1 = Image.open("4.マルセル・デュシャン「泉」.png")
-    st.image(image_1, width=400)
     
 
     with st.form('qestion_form', clear_on_submit=False):
@@ -311,7 +303,7 @@ def page5():
 page_names_to_funcs = {
     "Main Page": main_page,
     "1.問題提起力": page1,
-    "2.マルセル・デュシャン「泉」": page2,
+    "2.想像力": page2,
     "3.クリスト＆ジャンヌ＝クロード「L’Arc　de　Triomphe,　Wrapped」": page3,
     "4.フェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)」": page4,
     "5.パブロ・ピカソ「アヴィニョンの娘たち」": page5,
@@ -319,7 +311,7 @@ page_names_to_funcs = {
 
 selected_page = st.sidebar.radio("メニュー", ["main　page",
                                           "1.問題提起力",
-                                          "2.マルセル・デュシャン「泉」",
+                                          "2.想像力",
                                           "3.クリスト＆ジャンヌ＝クロード「L’Arc　de　Triomphe,　Wrapped」",
                                           "4.フェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)」", 
                                           "5.パブロ・ピカソ「アヴィニョンの娘たち」"])
@@ -327,7 +319,7 @@ if selected_page == "main　page":
     main_page()
 elif selected_page == "1.問題提起力":
     page1()
-elif selected_page == "2.マルセル・デュシャン「泉」":
+elif selected_page == "2.想像力":
     page2()
 elif selected_page == "3.クリスト＆ジャンヌ＝クロード「L’Arc　de　Triomphe,　Wrapped」":
     page3()
