@@ -21,8 +21,8 @@ conversation_history_5 = []  # Global scope
 
 def main_page():
     
-    st.title('ATAIとの対話型鑑賞')
-    st.write('<font size="5">アート思考力を高めるために対話型鑑賞しましょう。左のサイドバーからあなたが好きな絵を選んでください。好きな絵についてATAI(Art Thinking AI) と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう。好きな絵についてATAI(Art Thinking AI) と思ったこと/感じたことを話してみましょう。page1~5をの絵を選択して、対話型鑑賞をやってみましょう。</font>', unsafe_allow_html=True)
+    st.title('アート思考AIプログラム')
+    st.write('<font size="5">アート思考に必要な4つの力を高めるためにそれぞれの窓から対話をしましょう。左のサイドバーからあなたが体験したい窓を選んでください。窓を開けたらATAI(Art Thinking AI)と思ったこと/感じたことを話してみましょう。素直に感じたこと、思いを書き出して会話を楽しみましょう。</font>', unsafe_allow_html=True)
     image_main = Image.open("総合.png")
     st.image(image_main, width=400)
     st.write('<font size="5">対話型鑑賞：ニューヨーク近代美術館で生まれた美術教育の新しい方法論。作品を見ながら鑑賞者と教育者で対話しながら「なぜこの絵が気になるのか？」という疑問や感想を用いて、作品の背景にあるものを考察することで、自身の思考を深める教育法です。</font>', unsafe_allow_html=True)
@@ -97,7 +97,7 @@ def page2():
 
         if submitted:
             st.text('質問を受け付けました！')
-            conversation_history_1.append({"role": "user", "content": prompt})
+            conversation_history_2.append({"role": "user", "content": prompt})
             
 
             # OpenAIのAPIを直接使用
@@ -117,7 +117,7 @@ def page2():
                     {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
                     {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
                     {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
-                     ] + conversation_history_1
+                     ] + conversation_history_2
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
@@ -133,7 +133,7 @@ def page2():
 
             # print(prompt)
             # print(response.choices[0].message.content.strip())
-            conversation_history_1.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
+            conversation_history_2.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
 
     
 def page3():
@@ -153,7 +153,7 @@ def page3():
 
         if submitted:
             st.text('質問を受け付けました！')
-            conversation_history_1.append({"role": "user", "content": prompt})
+            conversation_history_3.append({"role": "user", "content": prompt})
             
 
             # OpenAIのAPIを直接使用
@@ -173,14 +173,14 @@ def page3():
                     {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
                     {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
                     {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
-                     ] + conversation_history_1
+                     ] + conversation_history_3
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
             
 
             # レスポンスの処理
-            with st.spinner("アート先生の返信を受診中..."):
+            with st.spinner("ATAIの返信を受診中..."):
                 time.sleep(2)
             st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
@@ -190,7 +190,7 @@ def page3():
 
             # print(prompt)
             # print(response.choices[0].message.content.strip())
-            conversation_history_1.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
+            conversation_history_3.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
 
 
 def page4():
@@ -210,7 +210,7 @@ def page4():
 
         if submitted:
             st.text('質問を受け付けました！')
-            conversation_history_1.append({"role": "user", "content": prompt})
+            conversation_history_4.append({"role": "user", "content": prompt})
             
 
             # OpenAIのAPIを直接使用
@@ -230,14 +230,14 @@ def page4():
                     {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
                     {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
                     {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
-                    ] + conversation_history_1
+                    ] + conversation_history_4
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
             
 
             # レスポンスの処理
-            with st.spinner("アート先生の返信を受診中..."):
+            with st.spinner("ATAIの返信を受診中..."):
                 time.sleep(2)
             st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
@@ -247,7 +247,7 @@ def page4():
 
             # print(prompt)
             # print(response.choices[0].message.content.strip())
-            conversation_history_1.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
+            conversation_history_4.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
 
 
 
@@ -268,7 +268,7 @@ def page5():
 
         if submitted:
             st.text('質問を受け付けました！')
-            conversation_history_1.append({"role": "user", "content": prompt})
+            conversation_history_5.append({"role": "user", "content": prompt})
             
 
             # OpenAIのAPIを直接使用
@@ -288,15 +288,14 @@ def page5():
                     {"role": "system", "content": "制約条件:相手が「終了」「終わります」と言ったら、あなたは「ありがとうございました」と返す。"},
                     {"role": "system", "content": "制約条件:あなたは相手との会話で[対話型鑑賞力]を評価する。相手の[対話型鑑賞力]を100点満点で点数を付ける。"},
                     {"role": "system", "content": "制約条件:講評として相手の考え方・特徴を述べる。"},
-                    {"role": "system", "content": "以上の命令書と制約条件に従って返信してください。"},
-                     ] + conversation_history_1
+                     ] + conversation_history_5
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
             
 
             # レスポンスの処理
-            with st.spinner("アート先生の返信を受診中..."):
+            with st.spinner("ATAIの返信を受診中..."):
                 time.sleep(2)
             st.markdown('''### ATAI (Art Thinking AI)より''')
             st.info(response['choices'][0]['message']['content'])
@@ -306,13 +305,13 @@ def page5():
 
             # print(prompt)
             # print(response.choices[0].message.content.strip())
-            conversation_history_1.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
+            conversation_history_5.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
 
 
 
 page_names_to_funcs = {
     "Main Page": main_page,
-    "1.リクリット・ティラバーニャ「“Who’s　Afraid　of　Red,　Yellow　and　Green,」": page1,
+    "1.リクリット・ティラバーニャ「Who’s　Afraid　of　Red,　Yellow　and　Green?」": page1,
     "2.マルセル・デュシャン「泉」": page2,
     "3.クリスト＆ジャンヌ＝クロード「L’Arc　de　Triomphe,　Wrapped」": page3,
     "4.フェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)」": page4,
@@ -320,14 +319,14 @@ page_names_to_funcs = {
     }
 
 selected_page = st.sidebar.radio("メニュー", ["main　page",
-                                          "1.リクリット・ティラバーニャ「“Who’s　Afraid　of　Red,　Yellow　and　Green?」",
+                                          "1.リクリット・ティラバーニャ「Who’s　Afraid　of　Red,　Yellow　and　Green?」",
                                           "2.マルセル・デュシャン「泉」",
                                           "3.クリスト＆ジャンヌ＝クロード「L’Arc　de　Triomphe,　Wrapped」",
                                           "4.フェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)」", 
                                           "5.パブロ・ピカソ「アヴィニョンの娘たち」"])
 if selected_page == "main　page":
     main_page()
-elif selected_page == "1.リクリット・ティラバーニャ「“Who’s　Afraid　of　Red,　Yellow　and　Green?」":
+elif selected_page == "1.リクリット・ティラバーニャ「Who’s　Afraid　of　Red,　Yellow　and　Green?」":
     page1()
 elif selected_page == "2.マルセル・デュシャン「泉」":
     page2()
