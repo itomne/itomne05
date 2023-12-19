@@ -31,7 +31,7 @@ def main_page():
 def page1():
     prompt = ""  # Initialize your prompt
 
-    st.title("リクリット・ティラバーニャ「Who's Afraid of Red, Yellow and Green?」")
+    st.title("1.問題提起力")
     st.write('<font size="5">好きな絵についてATAI(Art Thinking AI)  と思ったこと/感じたことを話してみましょう。「この絵は明るいね」「よくわからない」など素直にどんどん書き出して会話を楽しみましょう。</font>', unsafe_allow_html=True)
     image_1 = Image.open("11.リクリット・ティラバーニャ「“Who’s Afraid of Red, Yellow and Green,」.jpg")
     st.image(image_1, width=400)
@@ -310,7 +310,7 @@ def page5():
 
 page_names_to_funcs = {
     "Main Page": main_page,
-    "1.リクリット・ティラバーニャ「Who’s　Afraid　of　Red,　Yellow　and　Green?」": page1,
+    "1.問題提起力": page1,
     "2.マルセル・デュシャン「泉」": page2,
     "3.クリスト＆ジャンヌ＝クロード「L’Arc　de　Triomphe,　Wrapped」": page3,
     "4.フェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)」": page4,
@@ -318,14 +318,14 @@ page_names_to_funcs = {
     }
 
 selected_page = st.sidebar.radio("メニュー", ["main　page",
-                                          "1.リクリット・ティラバーニャ「Who’s　Afraid　of　Red,　Yellow　and　Green?」",
+                                          "1.問題提起力",
                                           "2.マルセル・デュシャン「泉」",
                                           "3.クリスト＆ジャンヌ＝クロード「L’Arc　de　Triomphe,　Wrapped」",
                                           "4.フェリックス・ゴンザレス＝トレス「無題(ロスの肖像 L.A.にて)」", 
                                           "5.パブロ・ピカソ「アヴィニョンの娘たち」"])
 if selected_page == "main　page":
     main_page()
-elif selected_page == "1.リクリット・ティラバーニャ「Who’s　Afraid　of　Red,　Yellow　and　Green?」":
+elif selected_page == "1.問題提起力":
     page1()
 elif selected_page == "2.マルセル・デュシャン「泉」":
     page2()
