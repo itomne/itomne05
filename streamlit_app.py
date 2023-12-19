@@ -33,8 +33,8 @@ def page1():
 
     st.title("1.問題提起力")
     st.write('<font size="5">ATAI(Art Thinking AI) と思ったこと/感じたことを会話してみましょう。</font>', unsafe_allow_html=True)
-    image_1 = Image.open("11.リクリット・ティラバーニャ「“Who’s Afraid of Red, Yellow and Green,」.jpg")
-    st.image(image_1, width=400)
+
+    
 
 
     with st.form('qestion_form', clear_on_submit=False):
