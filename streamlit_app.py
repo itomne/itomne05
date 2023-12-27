@@ -71,8 +71,8 @@ def page1():
                 ] +conversation_history_1
             }
 
-            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)            
-             if response.status_code == 200:
+            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
+        if response.status_code == 200:
                  
             # レスポンスの処理
             response_json = response.json()
@@ -82,7 +82,7 @@ def page1():
             # 会話履歴の更新
            
             conversation_history_1.append({"role": "assistant", "content": response_json['choices'][0]['message']['content']})
-             else:
+        else:
             # エラーメッセージの表示
             st.error("エラーが発生しました。もう一度お試しください。")
     
