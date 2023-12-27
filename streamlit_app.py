@@ -49,7 +49,7 @@ def page1():
             }
             data = {
                 "model": "gpt-4",
-                "messages": [
+                "messages":[
                     {"role": "system", "content": "命令書:アート思考のデモンストレーションを行います。"},
                     {"role": "system", "content": "命令書:あなたはアート思考の専門家で相手はビジネスパーソンです。"},
                     {"role": "system", "content": "命令書:あなたは以下の制約条件に従って、相手に問いかけます。"},
@@ -68,19 +68,23 @@ def page1():
                     {"role": "system", "content": "制約条件:それでは質問です。仕事における問題意識について考えてみましょう。あなたの会社・職場で「当たり前」「常識」とされているようなことで、疑問や違和感を抱いているものはあるでしょうか？ 思いついたものを自由に教えてください。何も思いつかない場合は、あなたの会社・職場で「当たり前」「常識」とされていることに対して、一度「本当に当たり前なのか」「本当に常識か」と疑問を投げかけてみましょう。"},
                     {"role": "system", "content": "制約条件:それでは質問です。あなたが感じた疑問・違和感・問題意識をまた別のアプローチで可視化していきます。あなたが今の仕事で本来あるべき姿はどんなものだと思いますか？　本来やりたかったこと・昔からの夢を思い出してみてください。あなたは本来どんなことをやりたかったですか？昔からの夢はありますか？"},
                     {"role": "system", "content": "制約条件:それでは質問です。今の仕事で本来やりたかったこと・昔からの夢と現状との間に、どんなギャップがあるとお感じですか？"},
-                ] + conversation_history_1
+                ] +conversation_history_1
             }
 
-            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
-            
+            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)            
+             if response.status_code == 200:
+                 
             # レスポンスの処理
-            with st.spinner("ATAIの返信を受診中..."):
-                time.sleep(2)
+            response_json = response.json()
             st.markdown('''### ATAI (Art Thinking AI)より''')
-            st.info(response['choices'][0]['message']['content'])
+            st.info(response_json['choices'][0]['message']['content'])
+            
+            # 会話履歴の更新
            
-            conversation_history_1.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
-
+            conversation_history_1.append({"role": "assistant", "content": response_json['choices'][0]['message']['content']})
+             else:
+            # エラーメッセージの表示
+            st.error("エラーが発生しました。もう一度お試しください。")
     
 def page2():
     prompt = ""  # Initialize your prompt
