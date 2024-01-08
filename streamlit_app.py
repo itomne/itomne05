@@ -219,7 +219,6 @@ def page4():
         if submitted:
             st.text('質問を受け付けました！')
             conversation_history_4.append({"role": "user", "content": prompt})
-            
 
             # OpenAIのAPIを直接使用
             headers = {
@@ -243,10 +242,9 @@ def page4():
                     {"role": "system", "content": "あなたは相手との会話の最後に実現力を評価する。相手の対話力を100点満点で点数を付けてさらに講評として相手の考え方・特徴を述べる。"},
                 ] + conversation_history_4
             }
-
+            
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data).json()
             
-
             # レスポンスの処理
             with st.spinner("ATAIの返信を受診中..."):
                 time.sleep(2)
@@ -254,29 +252,9 @@ def page4():
             st.info(response['choices'][0]['message']['content'])
             # st.info(response.choices[0].message.content)
             
-
-
             # print(prompt)
             # print(response.choices[0].message.content.strip())
             conversation_history_4.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
-
-
-
-
-
-            # レスポンスの処理
-            with st.spinner("ATAIの返信を受診中..."):
-                time.sleep(2)
-            st.markdown('''### ATAI (Art Thinking AI)より''')
-            st.info(response['choices'][0]['message']['content'])
-            # st.info(response.choices[0].message.content)
-            
-
-
-            # print(prompt)
-            # print(response.choices[0].message.content.strip())
-            conversation_history_5.append({"role": "assistant", "content": response['choices'][0]['message']['content']})
-
 
 
 page_names_to_funcs = {
